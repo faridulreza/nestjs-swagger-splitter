@@ -1,0 +1,49 @@
+{
+  "name": "swagger-controller-wise-openapi",
+  "version": "1.0.0",
+  "description": "A NestJS utility to generate and serve controller-wise OpenAPI JSON documentation with enhanced Swagger UI",
+  "main": "dist/index.js",
+  "types": "dist/index.d.ts",
+  "files": [
+    "dist/**/*",
+    "README.md",
+    "LICENSE"
+  ],
+  "scripts": {
+    "build": "tsc",
+    "clean": "rimraf dist",
+    "prepare": "npm run build",
+    "prepublishOnly": "npm run clean && npm run build",
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "version": "npm run build",
+    "postversion": "git push && git push --tags"
+  },
+  "keywords": [
+    "nestjs",
+    "swagger",
+    "openapi",
+    "documentation",
+    "controller",
+    "api",
+    "typescript"
+  ],
+  "author": "Your Name <your.email@example.com>",
+  "license": "MIT",
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/faridulreza/swagger-controller-wise-openapi.git"
+  },
+  "bugs": {
+    "url": "https://github.com/faridulreza/swagger-controller-wise-openapi/issues"
+  },
+  "homepage": "https://github.com/faridulreza/swagger-controller-wise-openapi#readme",
+  "peerDependencies": {
+    "@nestjs/common": "^10.0.0",
+    "@nestjs/swagger": "^7.0.0"
+  },
+  "devDependencies": {
+    "@types/node": "^20.8.9",
+    "rimraf": "^5.0.5",
+    "typescript": "^5.2.2"
+  }
+}
