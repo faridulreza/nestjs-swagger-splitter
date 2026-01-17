@@ -1,6 +1,6 @@
 {
   "name": "nestjs-swagger-splitter",
-  "version": "1.0.0",
+  "version": "1.0.1",
   "description": "A NestJS utility to split and serve tag-wise OpenAPI JSON documentation with enhanced Swagger UI",
   "main": "dist/index.js",
   "types": "dist/index.d.ts",
