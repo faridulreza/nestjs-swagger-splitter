@@ -50,17 +50,35 @@ export class SwaggerSplitter {
                   const linksDiv = document.createElement('div');
                   linksDiv.className = 'controller-links';
                   linksDiv.innerHTML = 
-                    '<h4>📋 Download Complete OpenAPI JSON:</h4>' +
-                    '<a href="${swaggerPath}/json" class="controller-link" target="_blank" title="Download Complete OpenAPI JSON">Complete OpenAPI JSON</a>' +
-                    '<h4>📋 Download Tag-Specific OpenAPI JSON:</h4>' +
+                    '<h4>📋 Download Complete OpenAPI Specification:</h4>' +
+                    '<a href="${swaggerPath}/json" class="controller-link" target="_blank" title="Download Complete OpenAPI Specification">Complete OpenAPI Specification</a>' +
+                    '<h4>📋 Download Tag-Specific OpenAPI Specification:</h4>' +
+                    '<input type="text" id="tag-search" placeholder="Search tags..." style="width: 100%; padding: 8px; margin-bottom: 10px; border: 1px solid #ccc; border-radius: 4px; font-size: 14px;">' +
                     tags.map(tag => 
                       '<a href="${swaggerPath}/json/' + tag + '" ' +
-                      'class="controller-link" target="_blank" ' +
-                      'title="Download OpenAPI JSON for ' + tag + '">' +
-                      tag + ' JSON</a>'
+                      'class="controller-link tag-link" target="_blank" ' +
+                      'title="Download OpenAPI Specification for ' + tag + '">' +
+                      tag + '</a>'
                     ).join('');
                   
                   infoSection.appendChild(linksDiv);
+                  
+                  // Add search functionality
+                  const searchInput = document.getElementById('tag-search');
+                  if (searchInput) {
+                    searchInput.addEventListener('input', function() {
+                      const query = this.value.toLowerCase();
+                      const tagLinks = linksDiv.querySelectorAll('.tag-link');
+                      tagLinks.forEach(link => {
+                        const tagName = link.textContent.toLowerCase();
+                        if (tagName.includes(query)) {
+                          link.style.display = 'inline-block';
+                        } else {
+                          link.style.display = 'none';
+                        }
+                      });
+                    });
+                  }
                 }
               }
             })
@@ -90,7 +108,7 @@ export class SwaggerSplitter {
       return Array.from(tags);
     };
     
-    // Expose complete OpenAPI JSON endpoint
+    // Expose complete OpenAPI Specification endpoint
     app.getHttpAdapter().get(`/${swaggerPath}/json`, (req, res) => {
       res.json(document);
     });
@@ -170,7 +188,7 @@ export class SwaggerSplitter {
       return filteredDocument;
     };
 
-    // Expose individual controller JSON endpoints
+    // Expose individual controller Specification endpoints
     app.getHttpAdapter().get(`/${swaggerPath}/json/:tag`, (req, res) => {
       const tagName = req.params.tag;
       const filteredDocument = getDocumentByTag(tagName);

@@ -12,7 +12,7 @@ npm install nestjs-swagger-splitter
 ```
 
 ```bash
-yarn add swagger-splitter
+yarn add nestjs-swagger-splitter
 ```
 
 ## Usage
