@@ -1,7 +1,7 @@
 {
-  "name": "swagger-controller-wise-openapi",
+  "name": "swagger-splitter",
   "version": "1.0.0",
-  "description": "A NestJS utility to generate and serve controller-wise OpenAPI JSON documentation with enhanced Swagger UI",
+  "description": "A NestJS utility to split and serve tag-wise OpenAPI JSON documentation with enhanced Swagger UI",
   "main": "dist/index.js",
   "types": "dist/index.d.ts",
   "files": [
@@ -23,20 +23,21 @@
     "swagger",
     "openapi",
     "documentation",
-    "controller",
+    "tag",
     "api",
-    "typescript"
+    "typescript",
+    "splitter"
   ],
   "author": "Your Name <your.email@example.com>",
   "license": "MIT",
   "repository": {
     "type": "git",
-    "url": "https://github.com/faridulreza/swagger-controller-wise-openapi.git"
+    "url": "https://github.com/faridulreza/swagger-splitter.git"
   },
   "bugs": {
-    "url": "https://github.com/faridulreza/swagger-controller-wise-openapi/issues"
+    "url": "https://github.com/faridulreza/swagger-splitter/issues"
   },
-  "homepage": "https://github.com/faridulreza/swagger-controller-wise-openapi#readme",
+  "homepage": "https://github.com/faridulreza/swagger-splitter#readme",
   "peerDependencies": {
     "@nestjs/common": "^10.0.0",
     "@nestjs/swagger": "^7.0.0"

@@ -1,1 +1,1 @@
-export { SwaggerControllerWiseOpenAPIJSON } from './swagger-controller-wise-openapi';
+export { SwaggerSplitter } from './swagger-splitter';

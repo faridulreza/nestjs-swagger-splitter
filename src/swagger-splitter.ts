@@ -1,7 +1,7 @@
 import { INestApplication } from '@nestjs/common';
 import { OpenAPIObject, SwaggerModule } from '@nestjs/swagger';
 
-export class SwaggerControllerWiseOpenAPIJSON {
+export class SwaggerSplitter {
   static setup(app: INestApplication, document: OpenAPIObject, swaggerPath: string): void {
     SwaggerModule.setup(swaggerPath, app, document, {
       customCss: `
@@ -39,12 +39,12 @@ export class SwaggerControllerWiseOpenAPIJSON {
       `,
       customJsStr: `
         setTimeout(function() {
-          // Fetch available controllers and add links
-          fetch('${swaggerPath}/controllers')
+          // Fetch available tags and add links
+          fetch('${swaggerPath}/tags')
             .then(response => response.json())
             .then(data => {
-              const controllers = data.controllers || [];
-              if (controllers.length > 0) {
+              const tags = data.tags || [];
+              if (tags.length > 0) {
                 const infoSection = document.querySelector('.swagger-ui .info');
                 if (infoSection) {
                   const linksDiv = document.createElement('div');
@@ -52,12 +52,12 @@ export class SwaggerControllerWiseOpenAPIJSON {
                   linksDiv.innerHTML = 
                     '<h4>📋 Download Complete OpenAPI JSON:</h4>' +
                     '<a href="${swaggerPath}/json" class="controller-link" target="_blank" title="Download Complete OpenAPI JSON">Complete OpenAPI JSON</a>' +
-                    '<h4>📋 Download Controller-Specific OpenAPI JSON:</h4>' +
-                    controllers.map(controller => 
-                      '<a href="${swaggerPath}/json/' + controller + '" ' +
+                    '<h4>📋 Download Tag-Specific OpenAPI JSON:</h4>' +
+                    tags.map(tag => 
+                      '<a href="${swaggerPath}/json/' + tag + '" ' +
                       'class="controller-link" target="_blank" ' +
-                      'title="Download OpenAPI JSON for ' + controller + ' controller">' +
-                      controller + ' JSON</a>'
+                      'title="Download OpenAPI JSON for ' + tag + '">' +
+                      tag + ' JSON</a>'
                     ).join('');
                   
                   infoSection.appendChild(linksDiv);
@@ -171,16 +171,16 @@ export class SwaggerControllerWiseOpenAPIJSON {
     };
 
     // Expose individual controller JSON endpoints
-    app.getHttpAdapter().get(`/${swaggerPath}/json/:controller`, (req, res) => {
-      const controllerName = req.params.controller;
-      const filteredDocument = getDocumentByTag(controllerName);
+    app.getHttpAdapter().get(`/${swaggerPath}/json/:tag`, (req, res) => {
+      const tagName = req.params.tag;
+      const filteredDocument = getDocumentByTag(tagName);
       res.json(filteredDocument);
     });
 
     // Expose endpoint to list all available controllers
-    app.getHttpAdapter().get(`/${swaggerPath}/controllers`, (req, res) => {
-      const controllers = getAllTags();
-      res.json({ controllers });
+    app.getHttpAdapter().get(`/${swaggerPath}/tags`, (req, res) => {
+      const tags = getAllTags();
+      res.json({ tags });
     });
   }
 }

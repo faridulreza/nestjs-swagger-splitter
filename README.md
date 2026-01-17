@@ -1,14 +1,18 @@
-# Swagger Controller-Wise OpenAPI
+# Swagger Splitter
 
-A NestJS utility package that adds controller-wise OpenAPI JSON generation and download capabilities to your swagger documentation page.
+A NestJS utility package that adds tag-wise OpenAPI JSON generation and download capabilities to your swagger documentation page.
 
 ## Why?
-So that your frontend developer can grab the controller specific OpenAPI json and use it with AI to implement the API calls without overflowing the API message limit.
+So that your frontend developer can grab the tag specific OpenAPI json and use it with AI to implement the API calls without overflowing AI context.
 
 ## Installation
 
 ```bash
-npm install swagger-controller-wise-openapi
+npm install swagger-splitter
+```
+
+```bash
+yarn add swagger-splitter
 ```
 
 ## Usage
@@ -26,13 +30,13 @@ const config = new DocumentBuilder()
   .build();
 
 const document = SwaggerModule.createDocument(app, config);
-SwaggerModule.setup('api', app, document);
+SwaggerModule.setup('swagger-path', app, document);
 ```
 
 ### After
 ```typescript
 import { SwaggerModule, DocumentBuilder } from '@nestjs/swagger';
-import { SwaggerControllerWiseOpenAPIJSON } from 'swagger-controller-wise-openapi';
+import { SwaggerSplitter } from 'swagger-splitter';
 
 const config = new DocumentBuilder()
   .setTitle('My API')
@@ -41,8 +45,8 @@ const config = new DocumentBuilder()
   .build();
 
 const document = SwaggerModule.createDocument(app, config);
-//SwaggerModule.setup('api', app, document); ❌
-SwaggerControllerWiseOpenAPIJSON.setup(app, document, 'api');
+//SwaggerModule.setup('swagger-path', app, document); ❌
+SwaggerSplitter.setup(app, document, 'swagger-path');
 ```
 
 ## What You Get
@@ -50,7 +54,7 @@ SwaggerControllerWiseOpenAPIJSON.setup(app, document, 'api');
 Once integrated, your Swagger UI will include:
 
 1. **Complete OpenAPI JSON Download**: A button to download the entire OpenAPI specification
-2. **Controller-Specific Downloads**: Individual download buttons for each controller's OpenAPI JSON
+2. **Tag-Specific Downloads**: Individual download buttons for each tag's OpenAPI JSON
 3. **Enhanced UI**: Clean, styled download sections with hover effects
 
 ## API Endpoints
@@ -58,31 +62,31 @@ Once integrated, your Swagger UI will include:
 The package automatically creates these endpoints:
 
 - `GET /{swaggerPath}/json` - Returns the complete OpenAPI JSON
-- `GET /{swaggerPath}/json/:controller` - Returns OpenAPI JSON for a specific controller
-- `GET /{swaggerPath}/controllers` - Returns a list of available controllers
+- `GET /{swaggerPath}/json/:tag` - Returns OpenAPI JSON for a specific tag
+- `GET /{swaggerPath}/tags` - Returns a list of available tags
 
 ## Example
 
 If your Swagger is set up at `/api`, you'll get:
 
 - `/api/json` - Complete OpenAPI JSON
-- `/api/json/users` - Users controller OpenAPI JSON
-- `/api/json/products` - Products controller OpenAPI JSON
-- `/api/controllers` - List of all controllers
+- `/api/json/users` - Users tag OpenAPI JSON
+- `/api/json/products` - Products tag OpenAPI JSON
+- `/api/tags` - List of all tags
 
 ## Use Cases
 
-- **Frontend Code Generation**: Generate TypeScript types for specific controllers
+- **Frontend Code Generation**: Generate TypeScript types for specific tags
 
 ### Programmatic Access
 
 ```typescript
-// Get list of available controllers
-const response = await fetch('/api/controllers');
-const { controllers } = await response.json();
-console.log(controllers); // ['users', 'products', 'orders']
+// Get list of available tags
+const response = await fetch('/api/tags');
+const { tags } = await response.json();
+console.log(tags); // ['users', 'products', 'orders']
 
-// Get controller-specific OpenAPI JSON
+// Get tag-specific OpenAPI JSON
 const usersApiSpec = await fetch('/api/json/users').then(r => r.json());
 // Use for code generation, testing, etc.
 ```
@@ -100,4 +104,3 @@ MIT
 ## Contributing
 
 Contributions are welcome! Please feel free to submit a Pull Request.
-# swagger-controller-wise-openapi
