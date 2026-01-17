@@ -41,6 +41,7 @@ const config = new DocumentBuilder()
   .build();
 
 const document = SwaggerModule.createDocument(app, config);
+//SwaggerModule.setup('api', app, document); ❌
 SwaggerControllerWiseOpenAPIJSON.setup(app, document, 'api');
 ```
 
