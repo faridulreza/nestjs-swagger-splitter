@@ -1,4 +1,4 @@
-# Swagger Splitter
+# NestJS Swagger Splitter
 
 A NestJS utility package that adds tag-wise OpenAPI JSON generation and download capabilities to your swagger documentation page.
 
@@ -8,7 +8,7 @@ So that your frontend developer can grab the tag specific OpenAPI json and use i
 ## Installation
 
 ```bash
-npm install swagger-splitter
+npm install nestjs-swagger-splitter
 ```
 
 ```bash
@@ -36,7 +36,7 @@ SwaggerModule.setup('swagger-path', app, document);
 ### After
 ```typescript
 import { SwaggerModule, DocumentBuilder } from '@nestjs/swagger';
-import { SwaggerSplitter } from 'swagger-splitter';
+import { SwaggerSplitter } from 'nestjs-swagger-splitter';
 
 const config = new DocumentBuilder()
   .setTitle('My API')

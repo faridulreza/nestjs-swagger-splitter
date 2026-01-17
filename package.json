@@ -1,5 +1,5 @@
 {
-  "name": "swagger-splitter",
+  "name": "nestjs-swagger-splitter",
   "version": "1.0.0",
   "description": "A NestJS utility to split and serve tag-wise OpenAPI JSON documentation with enhanced Swagger UI",
   "main": "dist/index.js",
@@ -32,12 +32,12 @@
   "license": "MIT",
   "repository": {
     "type": "git",
-    "url": "https://github.com/faridulreza/swagger-splitter.git"
+    "url": "https://github.com/faridulreza/nestjs-swagger-splitter.git"
   },
   "bugs": {
-    "url": "https://github.com/faridulreza/swagger-splitter/issues"
+    "url": "https://github.com/faridulreza/nestjs-swagger-splitter/issues"
   },
-  "homepage": "https://github.com/faridulreza/swagger-splitter#readme",
+  "homepage": "https://github.com/faridulreza/nestjs-swagger-splitter#readme",
   "peerDependencies": {
     "@nestjs/common": "^10.0.0",
     "@nestjs/swagger": "^7.0.0"
